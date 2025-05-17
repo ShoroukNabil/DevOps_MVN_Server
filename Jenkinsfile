@@ -15,12 +15,6 @@ pipeline {
 
                 echo 'Checking Maven version...'
                 sh 'mvn -v || echo "Maven not found"'
-
-                echo 'Checking Node.js version...'
-                sh 'node -v || echo "Node.js not found"'
-
-                echo 'Checking npm version...'
-                sh 'npm -v || echo "npm not found"'
             }
         }
     }
