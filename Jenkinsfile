@@ -17,5 +17,8 @@ pipeline {
                 sh 'mvn -v || echo "Maven not found"'
             }
         }
+        stage('Print READ_ME'){
+            sh 'cat README.md'
+        }
     }
 }
