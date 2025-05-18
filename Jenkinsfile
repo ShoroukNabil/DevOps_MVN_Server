@@ -18,7 +18,9 @@ pipeline {
             }
         }
         stage('Print READ_ME'){
-            sh 'cat README.md'
+            steps{
+                sh 'cat README.md'
+            }
         }
     }
 }
