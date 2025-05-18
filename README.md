@@ -11,3 +11,7 @@ package - take the compiled code and package it in its distributable format, suc
 verify - run any checks on results of integration tests to ensure quality criteria are met
 install - install the package into the local repository, for use as a dependency in other projects locally
 deploy - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.
+
+
+
+this branch triggers pipeline through webhook
