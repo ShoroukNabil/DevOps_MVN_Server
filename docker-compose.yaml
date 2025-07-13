@@ -1,40 +1,44 @@
 version: '3.8'
 
 services:
-  angular-app:
-    build: https://github.com/ShoroukNabil/DevOps_MVN_Client.git
-    container_name: angular_app
+  devops-angular-frontend:
+    build:
+      context: https://github.com/ShoroukNabil/DevOps_MVN_Client.git#demo-docker
+    container_name: devops-angular-frontend-container
     depends_on:
-      - app
+      - devops-springboot-backend
     networks:
-      - app-network
+      - devops-network
     ports:
-      - "4200:4200"
-  app:
+      - "4200:80"
+  devops-springboot-backend:
     build: .
-    container_name: spring-microservice
+    container_name: devops-springboot-backend-container
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/devops
+      - SPRING_DATASOURCE_URL=jdbc:mysql://devops-mysql-database:3306/devops
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=Dev_P@ssw0rd
+      - SERVER_PORT=8040
     depends_on:
-      - db
+      devops-mysql-database:
+        condition: service_healthy
     networks:
-      - app-network
+      - devops-network
     ports:
       - "8040:8040"
-  db:
+    restart: on-failure
+  devops-mysql-database:
     image: mysql:8.0
-    container_name: mysql-db
+    container_name: devops-mysql-database-container
     ports:
-      - "3305:3306"
+      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: Dev_P@ssw0rd
       MYSQL_DATABASE: devops
     networks:
-      - app-network
+      - devops-network
     volumes:
-      - mysql_data:/var/lib/mysql
+      - devops_mysql_data:/var/lib/mysql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
@@ -43,8 +47,8 @@ services:
       timeout: 5s
 
 networks:
-  app-network:
+  devops-network:
     driver: bridge
 
 volumes:
-  mysql_data:
+  devops_mysql_data:

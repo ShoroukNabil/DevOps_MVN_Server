@@ -16,6 +16,6 @@ VOLUME /tmp
 
 COPY --from=build /app/target/*.war app.war
 
-EXPOSE 8080
+EXPOSE 8040
 
 ENTRYPOINT ["java", "-jar", "app.war"]
