@@ -21,13 +21,13 @@ install_maven() {
 }
 
 build_and_run() {
-    # Move to the script's directory (where pom.xml is)
     cd "$(dirname "$0")"
-    
+
     echo "Building the Spring Boot application..."
     if mvn clean install -DskipTests; then
-        echo "Build successful. Starting the Spring Boot application..."
-        mvn spring-boot:run
+        echo "Build successful. Starting the Spring Boot application in background..."
+        nohup mvn spring-boot:run > app.log 2>&1 &
+        echo "Application started. Logs: $(pwd)/app.log"
     else
         echo "Build failed."
         exit 1
