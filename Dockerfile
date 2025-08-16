@@ -1,5 +1,5 @@
 # Stage 1: Build WAR using Maven
-FROM maven:3.8.6-openjdk-8-slim as build
+FROM maven:3.8.6-openjdk-8-slim AS build
 
 WORKDIR /app
 
@@ -16,6 +16,6 @@ VOLUME /tmp
 
 COPY --from=build /app/target/*.war app.war
 
-EXPOSE 8080
+EXPOSE 8040
 
 ENTRYPOINT ["java", "-jar", "app.war"]
