@@ -9,8 +9,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/user")
-@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/api/user")
+@CrossOrigin(origins = "*")
 @AllArgsConstructor
 public class UserController {
     private final UserService userService;
